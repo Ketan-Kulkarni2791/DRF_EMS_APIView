@@ -1,0 +1,80 @@
+Project Details:
+
+    -- Employee Management System.
+    -- Employee information, their department and job role are stored in database.
+
+    APIs created:
+
+    1. CRUD APIs for Departement data.
+    2. CRUD APIs for Job data.
+    3. CRUD APIs for Employee data
+
+Getting Started :
+
+    -- Create an empty folder and open it in VS code.
+    -- Create virtual environment :
+        > virtualenv ems_env
+    -- Activate the virtaul env :
+        > ems_env\Scripts\activate
+    -- Install django :
+        > pip install django
+    -- Create a new django project :
+        > django-admin startproject drf_ems
+    -- Then get inside the project directory to create new app and add it (ems_dev) to settings.py installed app :
+        > cd drf_ems
+        > python manage.py startapp ems_dev
+    -- Then install django rest framework and add it (rest_framework) to settings.py installed app.
+        > pip install djangorestframework
+
+
+Connection Between Django and PostgreSQL:
+
+    -- Install the “psycopg2” module to get Python to operate with Postgres.
+        pip install psycopg2
+    -- Then add following code block into settings.py file under the database section.
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                'NAME': ‘<database_name>’,
+                'USER': '<database_username>',
+                'PASSWORD': '<password>',
+                'HOST': '<database_hostname_or_ip>',
+                'PORT': '<database_port>',
+            }
+        }
+    
+
+Creating Models:
+
+    -- Create model Department.
+    -- Then run following two commands:
+        python manage.py makemigrations
+        python manage.py migrate
+
+
+Creating Serializers for Models:
+
+    -- Create a ModelSerializer for Department model.
+
+
+Creating Class Based View:
+
+    -- Create a class called DepartementAPIView(APIView).
+    -- Do the following imports:
+        from rest_framework.views import APIView
+
+
+Creating URLs For the Views:
+
+    -- following are the urls for department View.
+        urlpatterns = [
+            path('admin/', admin.site.urls),
+            path('departmentapi/', views.DepartementAPIView),
+            path('departmentapi/<int:pk>/', views.DepartementAPIView),
+        ]
+
+
+
+        
+
+
