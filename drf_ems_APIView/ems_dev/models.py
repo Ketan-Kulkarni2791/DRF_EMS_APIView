@@ -26,3 +26,12 @@ class Job(models.Model):
     def __str__(self) -> str:
         return self.job_title
 
+
+class Employee(models.Model):
+    employee_id = models.AutoField(primary_key=True)
+    first_name = models.CharField(max_length=100, blank=False, null=False)
+    last_name = models.CharField(max_length=100)
+    salary = models.IntegerField(blank=False, null=False)
+    department_id = models.ForeignKey(Department, related_name='department', on_delete=models.CASCADE)
+    job_id = models.ForeignKey(Job, related_name='job', on_delete=models.CASCADE)
+    

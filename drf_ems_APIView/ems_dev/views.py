@@ -3,8 +3,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Department
 from .models import Job
+from .models import Employee
 from .serializers import DepartmentSerializer
 from .serializers import JobSerializer
+from .serializers import EmployeeSerializer
 from rest_framework import status
 
 
@@ -45,7 +47,7 @@ class DepartementAPIView(APIView):
         serializer = DepartmentSerializer(dept, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            return Response({'msg': 'Department detail added successfully!'}, 
+            return Response({'msg': 'Department detail partially updated successfully!'}, 
                              status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_BAD_REQUEST)
     
@@ -93,7 +95,7 @@ class JobAPIView(APIView):
         serializer = JobSerializer(job, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            return Response({'msg': 'Job detail added successfully!'}, 
+            return Response({'msg': 'Job detail partially updated successfully!'}, 
                              status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_BAD_REQUEST)
     
@@ -103,4 +105,51 @@ class JobAPIView(APIView):
         job.delete()
         return Response({'msg': 'Job deleted successfully!'})
     
+
+
+class EmployeeAPIView(APIView):
+    """This the view to perform CRUD operations regarding employee data."""
+    def get(self, request, pk=None, format=None):
+        
+        id = pk
+        if id is not None:
+            emp = Employee.objects.get(id=id)
+            serializer = EmployeeSerializer(emp)
+            return Response(serializer.data)
+        emp = Employee.objects.all()
+        serializer = EmployeeSerializer(emp, many=True)
+        return Response(serializer.data)
     
+    def post(self, request, format=None):
+        serializer = EmployeeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'msg': 'Employee detail added successfully!'}, 
+                             status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_BAD_REQUEST)
+    
+    def put(self, request, pk, format=None):
+        id = pk
+        emp = Employee.objects.get(id=id)
+        serializer = EmployeeSerializer(emp, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'msg': 'Employee detail updated successfully!'}, 
+                             status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_BAD_REQUEST)
+        
+    def patch(self, request, pk, format=None):
+        id = pk
+        emp = Employee.objects.get(id=id)
+        serializer = EmployeeSerializer(emp, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'msg': 'Employee detail partially updated successfully!'}, 
+                             status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_BAD_REQUEST)
+    
+    def delete(self, request, pk, format=None):
+        employee_id = pk
+        emp = Employee.objects.get(employee_id=employee_id)
+        emp.delete()
+        return Response({'msg': 'Employee deleted successfully!'})

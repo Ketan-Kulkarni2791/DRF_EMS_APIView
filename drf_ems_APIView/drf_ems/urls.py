@@ -8,4 +8,6 @@ urlpatterns = [
     path('departmentapi/<int:pk>/', views.DepartementAPIView.as_view()),
     path('jobapi/', views.JobAPIView.as_view()),
     path('jobapi/<int:pk>/', views.JobAPIView.as_view()),
+    path('employeeapi/', views.EmployeeAPIView.as_view()),
+    path('employeeapi/<int:pk>/', views.EmployeeAPIView.as_view()),
 ]
