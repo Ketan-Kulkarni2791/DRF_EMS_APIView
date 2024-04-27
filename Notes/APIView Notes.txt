@@ -1,0 +1,176 @@
+Project Details:
+
+    -- Employee Management System.
+    -- Employee information, their department and job role are stored in database.
+
+    APIs created:
+
+    1. CRUD APIs for Departement data.
+    2. CRUD APIs for Job data.
+    3. CRUD APIs for Employee data
+
+Getting Started :
+
+    -- Create an empty folder and open it in VS code.
+    -- Create virtual environment :
+        > virtualenv ems_env
+    -- Activate the virtaul env :
+        > ems_env\Scripts\activate
+    -- Install django :
+        > pip install django
+    -- Create a new django project :
+        > django-admin startproject drf_ems
+    -- Then get inside the project directory to create new app and add it (ems_dev) to settings.py installed app :
+        > cd drf_ems
+        > python manage.py startapp ems_dev
+    -- Then install django rest framework and add it (rest_framework) to settings.py installed app.
+        > pip install djangorestframework
+
+Connection Between Django and PostgreSQL:
+
+    -- Install the “psycopg2” module to get Python to operate with Postgres.
+        pip install psycopg2
+    -- Then add following code block into settings.py file under the database section.
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                'NAME': ‘<database_name>’,
+                'USER': '<database_username>',
+                'PASSWORD': '<password>',
+                'HOST': '<database_hostname_or_ip>',
+                'PORT': '<database_port>',
+            }
+        }
+
+Creating Models:
+
+    -- Create model Department.
+    -- Then run following two commands:
+        python manage.py makemigrations
+        python manage.py migrate
+
+Creating Serializers for Models:
+
+    -- Create a ModelSerializer for Department model.
+
+About APIView and its Implementation :
+
+-- Rest framework provides an APIView class, which subclasses django's view class.
+-- APIView classes are different from reguler View classes in the following way:
+    1. Request passed to the handler methods will be REST framework's Request instances, not Django's
+       HttpRequest instances.
+    2. Handler methods may return REST framework's response, instead of django's HttpResponse. The view 
+       will manage content negotiation and setting the correct renderer on the response.
+    3. Any APIExceptions will be cought and mediated into appropriate response.
+
+-- Following are the necessary imports :
+
+   from rest_framework.views import APIView
+   from rest_framework.response import Response
+   from rest_framework import status
+
+-- CRUD is implemented as follows :
+
+class ExampleAPIView(APIView):
+    """This the view to perform CRUD operations regarding example data."""
+
+    def get(self, request, pk=None, format=None):
+      id = pk
+        if id is not None:
+            dept = Example.objects.get(id=id)
+            serializer = ExampleSerializer(dept)
+            return Response(serializer.data)
+        dept = Example.objects.all()
+        serializer = ExampleSerializer(dept, many=True)
+        return Response(serializer.data)
+   
+   def post(self, request, format=None):
+        serializer = ExampleSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'msg': 'Example detail added successfully!'}, 
+                             status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_BAD_REQUEST)
+   
+   def put(self, request, pk, format=None):
+        id = pk
+        exm = Example.objects.get(id=id)
+        serializer = ExampleSerializer(exm, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'msg': 'Example detail updated successfully!'}, 
+                             status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_BAD_REQUEST)
+
+   def patch(self, request, pk, format=None):
+        id = pk
+        exm = Example.objects.get(id=id)
+        serializer = ExampleSerializer(dept, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'msg': 'Example detail partially updated successfully!'}, 
+                             status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_BAD_REQUEST)
+
+   def delete(self, request, pk, format=None):
+        example_id = pk
+        exm = Example.objects.get(example_id=department_id)
+        exm.delete()
+        return Response({'msg': 'Example deleted successfully!'})
+
+
+-- If this Example model contains Check constraint, the code will be as follows in models.py file :
+
+   class Example(models.Model):
+      example_id = models.AutoField(primary_key=True)
+      example_title = models.CharField(max_length=100, blank=False, null=False)
+      min_salary = models.PositiveIntegerField()
+      max_salary = models.PositiveIntegerField()
+      
+      class Meta:
+         constraints = [
+                  CheckConstraint(check=models.Q(min_salary__gt=0), name='check_min_salary'),
+                  CheckConstraint(check=models.Q(max_salary__gt=0), name='check_max_salary')
+         ]
+         
+      def __str__(self) -> str:
+         return self.example_title
+
+-- If this Example model contains any Foreign key constraints, the code will be as follows in models.py
+   and in the serializers.py file.
+
+   class Example(models.Model):
+      example_id = models.AutoField(primary_key=True)
+      example_title = models.CharField(max_length=100, blank=False, null=False)
+      min_salary = models.PositiveIntegerField()
+      max_salary = models.PositiveIntegerField()
+      department_id = models.ForeignKey(Department, related_name='department', on_delete=models.CASCADE)
+      job_id = models.ForeignKey(Job, related_name='job', on_delete=models.CASCADE)
+      
+      class Meta:
+         constraints = [
+                  CheckConstraint(check=models.Q(min_salary__gt=0), name='check_min_salary'),
+                  CheckConstraint(check=models.Q(max_salary__gt=0), name='check_max_salary')
+         ]
+         
+      def __str__(self) -> str:
+         return self.example_title
+
+   
+   class ExampleSerializer(serializers.ModelSerializer):
+    # Add the related_name from the respective models
+    department = DepartmentSerializer(read_only=True, many=True)
+    job = JobSerializer(read_only=True, many=True)
+    class Meta:
+        model = Example
+        fields = '__all__'
+
+
+Creating URLs For the Views:
+
+    -- following are the urls for department View.
+        urlpatterns = [
+            path('admin/', admin.site.urls),
+            path('departmentapi/', views.DepartementAPIView),
+            path('departmentapi/<int:pk>/', views.DepartementAPIView),
+        ]

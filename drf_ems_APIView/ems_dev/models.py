@@ -35,3 +35,6 @@ class Employee(models.Model):
     department_id = models.ForeignKey(Department, related_name='department', on_delete=models.CASCADE)
     job_id = models.ForeignKey(Job, related_name='job', on_delete=models.CASCADE)
     
+    def __str__(self) -> str:
+        return self.first_name+self.last_name
+    
