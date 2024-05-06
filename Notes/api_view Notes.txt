@@ -1,0 +1,68 @@
+Project Details :
+
+    Following APIs using function based api view:
+
+        1. GET all the employees details.
+        2. GET first_name, last_name and salary of the employees.
+        3. GET all the employees whose salary is greater than or equal to 200000.
+        4. GET the employees where last_name = ‘Kulkarni’ and salary = 300000.
+        5. GET the employees whose salary is either 3 lacs or 2 lacs.
+        6. GET the employee first names that start with K.
+        7. GET the employee first names that have p in any position.
+        8. GET the employee first name that ends with 'a'.
+        9. GET the employee details of 'Rachit', 'Ketan', 'Manoj', 'Shubham'.
+        10. GET the employee details other than 'Rachit', 'Ketan', 'Manoj', 'Shubham'.
+        11. GET the employee details where salary is salary BETWEEN 200000 AND 300000.
+        12. GET distinct salary of the employees.
+        13. GET employee details in descending order of salary.
+        14. GET the employees details with their respective departments.
+        15. GET the employee names, salary and job title.
+
+
+About api_view and its Implementation :
+
+    -- This wrapper provides a few bits of functionality such as making sure you recieve Request instances
+       in your view, and adding context to Response objects so that content negotiation can be performed.
+    -- The wrapper also provide behaviour such as returning '405 Methos Not Allowed' responses when
+       appropriate, and handling any ParseError exception that occurs whenaccessing request.data with
+       malinformed input.
+    -- Basic syntax is as follows :
+
+        @api_view(['GET', 'POST', 'PUT', 'DELETE'])
+        def function_name(request):
+            -----------
+            -----------
+            -----------
+    
+    -- Following are the necessary import :
+
+        from rest_framework.decorators import api_view
+        from rest_framework.response import Response
+        from rest_framework import status
+
+    -- Then CRUD opearions can be done as follows :
+
+        @api_view(['GET'])
+        def student_list(request):
+            if request.method == 'GET':
+                stu = Student.objects.all()
+                serializer = StudentSerializer(stu, many=True)
+                return Response(serializer.data)
+
+        @api_view(['POST'])
+        def student_create(request):
+            if request.method == 'POST':
+                serializer = StudentSerializer(data = request.data)
+                if serializer.is_valid():
+                    serializer.save()
+                    res = {'msg': 'Data created'}
+                    return Response(res, status=status.HTTP_201_CREATED)
+                return Response(serializer.error, status=status.HTTP_400_BAD_REQUEST)
+
+    -- Request :
+
+        > REST framework's request objects provide flexible request parsing that allows you to treat requests
+          with JSON data or other media types in the same way 
+        > request.method = It returns the upper cased string representation of the request's HTTP method.
+                           Browser based PUT, PATCH and DELETE forms are transperantly supported.
+        > request.query_params = It is a more correctly named synonym for request.GET.

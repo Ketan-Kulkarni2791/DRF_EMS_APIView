@@ -11,7 +11,7 @@ from rest_framework import status
 
 
 class DepartementAPIView(APIView):
-    """This the view to perform CRUD operations regarding department data."""
+    """This is the view to perform CRUD operations regarding department data."""
     def get(self, request, pk=None, format=None):
         
         id = pk
@@ -24,12 +24,13 @@ class DepartementAPIView(APIView):
         return Response(serializer.data)
     
     def post(self, request, format=None):
-        serializer = DepartmentSerializer(data=request.data)
+        
+        serializer = DepartmentSerializer(data=request.data, many=True)
         if serializer.is_valid():
             serializer.save()
             return Response({'msg': 'Department detail added successfully!'}, 
                              status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     def put(self, request, pk, format=None):
         id = pk
@@ -39,7 +40,7 @@ class DepartementAPIView(APIView):
             serializer.save()
             return Response({'msg': 'Department detail updated successfully!'}, 
                              status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
     def patch(self, request, pk, format=None):
         id = pk
@@ -49,7 +50,7 @@ class DepartementAPIView(APIView):
             serializer.save()
             return Response({'msg': 'Department detail partially updated successfully!'}, 
                              status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     def delete(self, request, pk, format=None):
         department_id = pk
@@ -72,7 +73,7 @@ class JobAPIView(APIView):
         return Response(serializer.data)
     
     def post(self, request, format=None):
-        serializer = JobSerializer(data=request.data)
+        serializer = JobSerializer(data=request.data, many=True)
         if serializer.is_valid():
             serializer.save()
             return Response({'msg': 'Job detail added successfully!'}, 
@@ -121,7 +122,7 @@ class EmployeeAPIView(APIView):
         return Response(serializer.data)
     
     def post(self, request, format=None):
-        serializer = EmployeeSerializer(data=request.data)
+        serializer = EmployeeSerializer(data=request.data, many=True)
         if serializer.is_valid():
             serializer.save()
             return Response({'msg': 'Employee detail added successfully!'}, 

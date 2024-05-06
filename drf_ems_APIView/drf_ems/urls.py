@@ -1,6 +1,8 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+import ems_api.urls
 from ems_dev import views
+import ems_api
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -10,4 +12,5 @@ urlpatterns = [
     path('jobapi/<int:pk>/', views.JobAPIView.as_view()),
     path('employeeapi/', views.EmployeeAPIView.as_view()),
     path('employeeapi/<int:pk>/', views.EmployeeAPIView.as_view()),
+    path('api/', include(ems_api.urls)),
 ]

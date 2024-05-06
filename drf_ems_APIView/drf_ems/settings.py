@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ems_dev',
+    'ems_api',
     'rest_framework',
 ]
 

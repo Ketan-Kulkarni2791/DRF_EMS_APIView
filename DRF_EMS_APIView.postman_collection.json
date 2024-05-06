@@ -1,0 +1,499 @@
+{
+	"info": {
+		"_postman_id": "83ee979a-56df-463b-8f1a-d8e09da7dd96",
+		"name": "DRF_EMS_APIView",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ORM_APIs",
+			"item": [
+				{
+					"name": "GET all the employees details",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/emp_list",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"emp_list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET first_name, last_name and salary of the employees",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/specific_col_emp_list",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"specific_col_emp_list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gt_lookuo_employee_salary",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/gt_lookup_employee_salary",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"gt_lookup_employee_salary"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "or_operator_emp_list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/or_operator_employee_list",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"or_operator_employee_list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET the employees whose salary is either 3 lacs or 1.5 lacs.",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/or_operator_employee_salary",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"or_operator_employee_salary"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET the employee first names that start with K",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/startswith_operator_employee_names",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"startswith_operator_employee_names"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET the employee first names that have i in any position",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/contains_operator_employee_names",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"contains_operator_employee_names"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET the employee first name that ends with 'a'",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/endswith_operator_employee_names",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"endswith_operator_employee_names"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET the employee details of 'Rachit', 'Ketan', 'Manoj', 'Shubham'",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/in_operator_employee_names",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"in_operator_employee_names"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET the employee details other than 'Rachit', 'Ketan', 'Manoj', 'Shubham'",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/not_in_operator_employee_names",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"not_in_operator_employee_names"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GET Departement details",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/departmentapi",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"departmentapi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Department",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\"department_name\": \"IT Development\"},\r\n    {\"department_name\": \"IT Infrastructure\"},\r\n    {\"department_name\": \"Data Analytics\"},\r\n    {\"department_name\": \"Finance\"},\r\n    {\"department_name\": \"HR\"},\r\n    {\"department_name\": \"Data Science\"},\r\n    {\"department_name\": \"Cloud\"}\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/departmentapi/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"departmentapi",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Department",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"department_id\": 100, \r\n    \"department_name\": \"IT Development\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/departmentapi/1/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"departmentapi",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Job Details",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/jobapi",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"jobapi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Job Details",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"job_title\": \"Software Developer\",\r\n        \"min_salary\": 15000,\r\n        \"max_salary\": 300000\r\n    },\r\n    {\r\n        \"job_title\": \"Software Tester\",\r\n        \"min_salary\": 10000,\r\n        \"max_salary\": 100000\r\n    },\r\n    {\r\n        \"job_title\": \"IT Infra Admin\",\r\n        \"min_salary\": 7000,\r\n        \"max_salary\": 30000\r\n    },\r\n    {\r\n        \"job_title\": \"Data Analyst\",\r\n        \"min_salary\": 12000,\r\n        \"max_salary\": 200000\r\n    },\r\n    {\r\n        \"job_title\": \"Business Analyst\",\r\n        \"min_salary\": 11000,\r\n        \"max_salary\": 180000\r\n    },\r\n    {\r\n        \"job_title\": \"Accountant\",\r\n        \"min_salary\": 14000,\r\n        \"max_salary\": 250000\r\n    },\r\n    {\r\n        \"job_title\": \"SPOC HR\",\r\n        \"min_salary\": 8000,\r\n        \"max_salary\": 50000\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/jobapi/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"jobapi",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Employee Details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/employeeapi",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"employeeapi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Employee Details",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"first_name\": \"Rachit\",\r\n        \"last_name\": \"Kulkarni\",\r\n        \"salary\": 300000,\r\n\t\t\"department_id\": 8,\r\n\t\t\"job_id\": 8\r\n    },\r\n    {\r\n        \"first_name\": \"Ketan\",\r\n        \"last_name\": \"Kulkarni\",\r\n        \"salary\": 300000,\r\n\t\t\"department_id\": 8,\r\n\t\t\"job_id\": 8\r\n    },\r\n    {\r\n        \"first_name\": \"Rahul\",\r\n        \"last_name\": \"Gupta\",\r\n        \"salary\": 280000,\r\n\t\t\"department_id\": 10,\r\n\t\t\"job_id\": 11\r\n    },\r\n    {\r\n        \"first_name\": \"Ajinkya\",\r\n        \"last_name\": \"Tonpe\",\r\n        \"salary\": 10000,\r\n\t\t\"department_id\": 12,\r\n\t\t\"job_id\": 12\r\n    },\r\n    {\r\n        \"first_name\": \"Shobha\",\r\n        \"last_name\": \"Tripathy\",\r\n        \"salary\": 50000,\r\n\t\t\"department_id\": 11,\r\n\t\t\"job_id\": 13\r\n    },\r\n    {\r\n        \"first_name\": \"Indu\",\r\n        \"last_name\": \"Singh\",\r\n        \"salary\": 30000,\r\n\t\t\"department_id\": 8,\r\n\t\t\"job_id\": 9\r\n    },\r\n    {\r\n        \"first_name\": \"Manoj\",\r\n        \"last_name\": \"Gadkar\",\r\n        \"salary\": 25000,\r\n\t\t\"department_id\": 9,\r\n\t\t\"job_id\": 10\r\n    },\r\n    {\r\n        \"first_name\": \"Shubham\",\r\n        \"last_name\": \"Giradkar\",\r\n        \"salary\": 180000,\r\n\t\t\"department_id\": 8,\r\n\t\t\"job_id\": 9\r\n    },\r\n    {\r\n        \"first_name\": \"Pooja\",\r\n        \"last_name\": \"Shrivastava\",\r\n        \"salary\": 30000,\r\n\t\t\"department_id\": 11,\r\n\t\t\"job_id\": 13\r\n    },\r\n    {\r\n        \"first_name\": \"Chandler\",\r\n        \"last_name\": \"Bing\",\r\n        \"salary\": 280000,\r\n\t\t\"department_id\": 8,\r\n\t\t\"job_id\": 8\r\n    },\r\n\t{\r\n        \"first_name\": \"Phebe\",\r\n        \"last_name\": \"Buffey\",\r\n        \"salary\": 250000,\r\n\t\t\"department_id\": 8,\r\n\t\t\"job_id\": 9\r\n    },\r\n    {\r\n        \"first_name\": \"Rachel\",\r\n        \"last_name\": \"Green\",\r\n        \"salary\": 150000,\r\n\t\t\"department_id\": 12,\r\n\t\t\"job_id\": 14\r\n    },\r\n    {\r\n        \"first_name\": \"Monica\",\r\n        \"last_name\": \"Geller\",\r\n        \"salary\": 30000,\r\n\t\t\"department_id\": 12,\r\n\t\t\"job_id\": 12\r\n    },\r\n    {\r\n        \"first_name\": \"Ross\",\r\n        \"last_name\": \"Geller\",\r\n        \"salary\": 260000,\r\n\t\t\"department_id\": 13,\r\n\t\t\"job_id\": 8\r\n    },\r\n    {\r\n        \"first_name\": \"Michael\",\r\n        \"last_name\": \"Scott\",\r\n        \"salary\": 240000,\r\n\t\t\"department_id\": 9,\r\n\t\t\"job_id\": 10\r\n    },\r\n\t{\r\n        \"first_name\": \"Joey\",\r\n        \"last_name\": \"Tribianni\",\r\n        \"salary\": 30000,\r\n\t\t\"department_id\": 12,\r\n\t\t\"job_id\": 14\r\n    },\r\n    {\r\n        \"first_name\": \"Regina\",\r\n        \"last_name\": \"Phalangi\",\r\n        \"salary\": 150000,\r\n\t\t\"department_id\": 10,\r\n\t\t\"job_id\": 11\r\n    },\r\n    {\r\n        \"first_name\": \"Dwight\",\r\n        \"last_name\": \"Schrute\",\r\n        \"salary\": 70000,\r\n\t\t\"department_id\": 10,\r\n\t\t\"job_id\": 11\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/employeeapi/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"employeeapi",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Job details",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/jobapi/1/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"jobapi",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
