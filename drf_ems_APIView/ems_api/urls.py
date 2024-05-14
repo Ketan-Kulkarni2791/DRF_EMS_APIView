@@ -13,5 +13,10 @@ urlpatterns = [
     path('endswith_operator_employee_names/', views.endswith_operator_employee_names),
     path('in_operator_employee_names/', views.in_operator_employee_names),
     path('not_in_operator_employee_names/', views.not_in_operator_employee_names),
+    path('between_operator_employee_salary/', views.between_operator_employee_salary),
+    path('between_operator_employee_salary/', views.between_operator_employee_salary),
+    path('distinct_clause_employee_salary/', views.distinct_clause_employee_salary),
+    path('orderby_clause_employee_salary/', views.orderby_clause_employee_salary),
+    path('emp_dept_detail_employee_list/', views.emp_dept_detail_employee_list),
 ]
 

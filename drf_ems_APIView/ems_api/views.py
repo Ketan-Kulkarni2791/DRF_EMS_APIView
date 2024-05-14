@@ -3,13 +3,20 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from django.db.models import Q
+from django.core.serializers import serialize
+from django.http import JsonResponse
+import json
+
 from ems_dev.models import Department
 from ems_dev.models import Job
 from ems_dev.models import Employee
 from ems_dev.serializers import DepartmentSerializer
 from ems_dev.serializers import JobSerializer
 from ems_dev.serializers import EmployeeSerializer
-from .serializers import specific_columns_employee_list_serializer
+from .serializers import (specific_columns_employee_list_serializer,
+                          distinct_clause_employee_salary_serializer,
+                        )
+
 
 
 ### 1. GET all the employees details.
@@ -91,3 +98,32 @@ def not_in_operator_employee_names(request):
     emp = Employee.objects.filter(~Q(first_name__in=('Rachit', 'Ketan', 'Manoj', 'Shubham')))
     serializer = EmployeeSerializer(emp, many=True)
     return Response(serializer.data)
+
+### 11. GET the employee details where salary is salary BETWEEN 200000 AND 300000.
+@api_view(['GET'])
+def between_operator_employee_salary(request):
+    emp = Employee.objects.filter(salary__range=(200000, 300000))
+    serializer = EmployeeSerializer(emp, many=True)
+    return Response(serializer.data)
+
+### 12. GET distinct salary of the employees.
+@api_view(['GET'])
+def distinct_clause_employee_salary(request):
+    emp = Employee.objects.all().distinct("salary")
+    serializer = distinct_clause_employee_salary_serializer(emp, many=True)
+    return Response(serializer.data)
+
+### 13. GET employee details in descending order of salary.
+@api_view(['GET'])
+def orderby_clause_employee_salary(request):
+    emp = Employee.objects.all().order_by('-salary')
+    serializer = EmployeeSerializer(emp, many=True)
+    return Response(serializer.data)
+
+### 14. GET the employees details with their respective departments.
+@api_view(['GET'])
+def emp_dept_detail_employee_list(request):
+    emp = Employee.objects.select_related('department_id')\
+        .values('employee_id', 'first_name', 'last_name', 'salary', 'department_id__department_name')
+    employee_dept_data = [e for e in emp]
+    return JsonResponse(employee_dept_data, safe=False)
